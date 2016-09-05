@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PLATFORM_TESTING="$GITHUB_ENDPOINT/platform-testing.git"
-PACKAGE_SERVER="http://pnda-build:3535"
+PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Step 1: cloning platform-testing $PLATFORM_TESTING in $PWD" >> $LOG_FILE
 
