@@ -1,6 +1,8 @@
 #!/bin/sh
 
 PLATFORM_TESTING="$GITHUB_ENDPOINT/platform-testing.git"
+PACKAGE_SERVER="http://pnda-build:3535"
+
 echo "Step 1: cloning platform-testing $PLATFORM_TESTING in $PWD" >> $LOG_FILE
 
 if [ ! -d "$PWD/platform-testing" ]; then
@@ -33,8 +35,9 @@ fi
 sha512sum platform-testing-cdh-$VERSION.tar.gz > platform-testing-cdh-$VERSION.tar.gz.sha512.txt
 sha512sum platform-testing-general-$VERSION.tar.gz > platform-testing-general-$VERSION.tar.gz.sha512.txt
 mkdir -p "$RELEASE_PATH/packages/platform/releases/platform-testing"
-mv platform-testing-cdh-$VERSION.tar.gz $RELEASE_PATH/packages/platform/releases/platform-testing/platform-testing-cdh-$VERSION.tar.gz
-mv platform-testing-general-$VERSION.tar.gz $RELEASE_PATH/packages/platform/releases/platform-testing/platform-testing-general-$VERSION.tar.gz
-mv platform-testing-cdh-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/platform-testing/platform-testing-cdh-$VERSION.tar.gz.sha512.txt
-mv platform-testing-general-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/platform-testing/platform-testing-general-$VERSION.tar.gz.sha512.txt
-cd ../..
+
+
+curl -X POST -o platform-testing-cdh-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/platform-testing-cdh-$VERSION.tar.gz
+curl -X POST -o platform-testing-general-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/platform-testing-general-$VERSION.tar.gz
+curl -X POST -o platform-testing-cdh-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/platform-testing-cdh-$VERSION.tar.gz.sha512.txt
+curl -X POST -o platform-testing-general-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/platform-testing/platform-testing-general-$VERSION.tar.gz.sha512.txt
