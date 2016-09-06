@@ -40,8 +40,8 @@ sha512sum platform-testing-general-$VERSION.tar.gz > platform-testing-general-$V
 
 for file in platform-testing-cdh platform-testing-general
 do
-  echo "curl -X POST -o $file-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz"
-  curl -X POST -o $file-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz
+  echo "curl -X POST --data-binary @$file-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz"
+  curl -X POST --data-binary @$file-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz
   echo "curl -X POST -o $file-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz.sha512.txt"
-  curl -X POST -o $file-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz.sha512.txt
+  curl -X POST --data-binary @$file-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/$file-$VERSION.tar.gz.sha512.txt
 done
