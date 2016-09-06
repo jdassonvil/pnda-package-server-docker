@@ -1,7 +1,9 @@
 #!/bin/sh
 
 PLATFORM_LIBRARIES="$GITHUB_ENDPOINT/platform-libraries.git" 
-echo "Step 7: cloning platform-libraries $PLATFORM_LIBRARIES in $PWD" >> $LOG_FILE
+PACKAGE_SERVER="http://192.168.1.205:3535"
+
+echo "Cloning platform-libraries $PLATFORM_LIBRARIES in $PWD" >> $LOG_FILE
 if [ ! -d "$PWD/platform-libraries" ]; then
 	git clone $PLATFORM_LIBRARIES
 	if [ ! -d "$PWD/platform-libraries" ]; then
@@ -23,6 +25,7 @@ echo "VERSION=$VERSION" > VERSION
 SPARK_HOME="$PWD/../spark-1.5.0-bin-hadoop2.6"
 SPARK_VERSION='1.5.0'
 HADOOP_VERSION='2.6'
+
 if [ ! -d $SPARK_HOME ]; then
   cd ..
   echo "	downloading spark 1.5.0 in $PWD" >> $LOG_FILE
@@ -41,7 +44,11 @@ else
 	echo "	Build done: platformlibs-$VERSION-py2.7.egg" >> $LOG_FILE
 fi
 sha512sum platformlibs-$VERSION-py2.7.egg > platformlibs-$VERSION-py2.7.egg.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/platform-libraries"
-mv platformlibs-$VERSION-py2.7.egg $RELEASE_PATH/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg
-mv platformlibs-$VERSION-py2.7.egg.sha512.txt $RELEASE_PATH/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg.sha512.txt
-cd ../..
+
+# Publish to package server
+
+echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg"
+curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg
+
+echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg.sha512.txt"
+curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg.sha512.txt
