@@ -36,10 +36,10 @@ fi
 sha512sum console-backend-data-logger-$VERSION.tar.gz > console-backend-data-logger-$VERSION.tar.gz.sha512.txt
 
 # Publish to package server
-echo "curl -X POST -o console-backend-data-logger-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-logger-$VERSION.tar.gz"
-curl -X POST -o console-backend-data-logger-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-logger-$VERSION.tar.gz
-echo "curl -X POST -o console-backend-data-logger-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-logger-$VERSION.tar.gz.sha512.txt"
-curl -X POST -o console-backend-data-logger-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-logger-$VERSION.tar.gz.sha512.txt
+echo "curl -X POST  --data-binary @console-backend-data-logger-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-logger-$VERSION.tar.gz \n"
+curl -X POST --data-binary @console-backend-data-logger-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-logger-$VERSION.tar.gz
+echo "curl -X POST --data-binary @console-backend-data-logger-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/console/console-backend-data-logger-$VERSION.tar.gz.sha512.txt \n"
+curl -X POST --data-binary @console-backend-data-logger-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-logger-$VERSION.tar.gz.sha512.txt
 
 cd ..
 
@@ -60,7 +60,7 @@ fi
 
 # Publish to package server
 
-echo "curl -X POST -o console-backend-data-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-manager-$VERSION.tar.gz"
-curl -X POST -o console-backend-data-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-manager-$VERSION.tar.gz
-echo "curl -X POST -o console-backend-data-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-manager-$VERSION.tar.gz.sha512.txt"
-curl -X POST -o console-backend-data-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-testing/console-backend-data-manager-$VERSION.tar.gz.sha512.txt
+echo "curl -X POST --data-binary @console-backend-data-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-manager-$VERSION.tar.gz"
+curl -X POST --data-binary @console-backend-data-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-manager-$VERSION.tar.gz
+echo "curl -X POST --data-binary @console-backend-data-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-manager-$VERSION.tar.gz.sha512.txt"
+curl -X POST --data-binary @console-backend-data-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-manager-$VERSION.tar.gz.sha512.txt
