@@ -1,6 +1,8 @@
 #!/bin/sh
 
 PLATFORM_DEPLOYMENT_MANAGER="$GITHUB_ENDPOINT/platform-deployment-manager.git"
+PACKAGE_SERVER="http://192.168.1.205:3535"
+
 echo "Cloning platform-deployment-manager $PLATFORM_DEPLOYMENT_MANAGER in $PWD"
 if [ ! -d "$PWD/platform-deployment-manager" ]; then
 	echo "	clonning $BRANCH for platform-deployment-manager"
@@ -32,7 +34,10 @@ else
 	echo "	Build done: deployment-manager-$VERSION.tar.gz"
 fi
 sha512sum deployment-manager-$VERSION.tar.gz > deployment-manager-$VERSION.tar.gz.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/deployment-manager"
-mv deployment-manager-$VERSION.tar.gz $RELEASE_PATH/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz
-mv deployment-manager-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz.sha512.txt
-cd ../../..
+
+# Publish to package server
+
+echo "curl -X POST --data-binary @deployment-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz"
+curl -X POST --data-binary @deployment-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz
+echo "curl -X POST --data-binary @deployment-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz.sha512.txt"
+curl -X POST --data-binary @deployment-manager-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/deployment-manager/deployment-manager-$VERSION.tar.gz.sha512.txt
