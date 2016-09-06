@@ -40,7 +40,10 @@ else
 	echo "	Build done: $PNDA_RELEASE_NAME" >> $LOG_FILE
 fi
 sha512sum ${PNDA_RELEASE_NAME} > ${PNDA_RELEASE_NAME}.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/gobblin"
-cp ${PNDA_RELEASE_NAME} $RELEASE_PATH/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}
-cp  ${PNDA_RELEASE_NAME}.sha512.txt $RELEASE_PATH/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}.sha512.txt
-cd ..
+
+# Publish to package server
+
+echo "curl -X POST --data-binary @${PNDA_RELEASE_NAME}.tar.gz $PACKAGE_SERVER/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}.tar.gz"
+curl -X POST --data-binary @${PNDA_RELEASE_NAME}.tar.gz $PACKAGE_SERVER/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}.tar.gz
+echo "curl -X POST --data-binary @${PNDA_RELEASE_NAME}.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}.tar.gz.sha512.txt"
+curl -X POST --data-binary @${PNDA_RELEASE_NAME}.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/gobblin/${PNDA_RELEASE_NAME}.tar.gz.sha512.txt
