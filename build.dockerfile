@@ -10,7 +10,7 @@ RUN apt-get update -y && apt-get install -y wget git nodejs npm gradle curl pyth
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
-RUN npm install grunt
+RUN npm -g install grunt
 
 ENV GITHUB_ENDPOINT https://github.com/pndaproject
 ENV BRANCH master

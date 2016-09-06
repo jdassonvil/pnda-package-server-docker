@@ -1,16 +1,16 @@
 #!/bin/sh
 
 PLATFORM_DEPLOYMENT_MANAGER="$GITHUB_ENDPOINT/platform-deployment-manager.git"
-echo "Step 3: cloning platform-deployment-manager $PLATFORM_DEPLOYMENT_MANAGER in $PWD" >> $LOG_FILE
+echo "Cloning platform-deployment-manager $PLATFORM_DEPLOYMENT_MANAGER in $PWD"
 if [ ! -d "$PWD/platform-deployment-manager" ]; then
-	echo "	clonning $BRANCH for platform-deployment-manager" >> $LOG_FILE
+	echo "	clonning $BRANCH for platform-deployment-manager"
 	git clone $PLATFORM_DEPLOYMENT_MANAGER
 	if [ ! -d "$PWD/platform-deployment-manager" ]; then
-		echo "Error clonning platform-deployment-manager" >> $LOG_FILE
+		echo "Error clonning platform-deployment-manager"
 		exit 1
 	fi
 else
-	echo "	getting $BRANCH for platform-deployment-manager" >> $LOG_FILE
+	echo "	getting $BRANCH for platform-deployment-manager"
 fi
 cd platform-deployment-manager
 git checkout $BRANCH
@@ -26,10 +26,10 @@ mvn versions:set -DnewVersion=$VERSION
 mvn clean package
 cd target
 if [ ! -f deployment-manager-$VERSION.tar.gz ]; then
-	echo "	Error building platform-deployment-manager" >> $LOG_FILE
+	echo "	Error building platform-deployment-manager"
 	exit 1
 else
-	echo "	Build done: deployment-manager-$VERSION.tar.gz" >> $LOG_FILE
+	echo "	Build done: deployment-manager-$VERSION.tar.gz"
 fi
 sha512sum deployment-manager-$VERSION.tar.gz > deployment-manager-$VERSION.tar.gz.sha512.txt
 mkdir -p "$RELEASE_PATH/packages/platform/releases/deployment-manager"
