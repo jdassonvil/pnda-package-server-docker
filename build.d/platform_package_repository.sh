@@ -1,15 +1,17 @@
 #!/bin/sh
 
 PLATFORM_PACKAGE_REPOSITORY="$GITHUB_ENDPOINT/platform-package-repository.git"
-echo "Step 4: cloning platform-package-repository $PLATFORM_PACKAGE_REPOSITORY in $PWD" >> $LOG_FILE
+PACKAGE_SERVER="http://192.168.1.205:3535"
+
+echo "Cloning platform-package-repository $PLATFORM_PACKAGE_REPOSITORY in $PWD"
 if [ ! -d "$PWD/platform-package-repository" ]; then
 	git clone $PLATFORM_PACKAGE_REPOSITORY
 	if [ ! -d "$PWD/platform-package-repository" ]; then
-		echo "Error clonning platform-package-repository" >> $LOG_FILE
+		echo "Error clonning platform-package-repository"
 		exit 1
 	fi
 else
-	echo "	getting $BRANCH for platform-package-repository" >> $LOG_FILE
+	echo "	getting $BRANCH for platform-package-repository"
 fi
 cd platform-package-repository
 git checkout $BRANCH
@@ -24,13 +26,15 @@ mvn versions:set -DnewVersion=$VERSION
 mvn clean package
 cd target
 if [ ! -f package-repository-$VERSION.tar.gz ]; then
-	echo "	Error building platform-package-repository" >> $LOG_FILE
+	echo "	Error building platform-package-repository"
 	exit 1
 else
-	echo "	Build done: package-repository-$VERSION.tar.gz" >> $LOG_FILE
+	echo "	Build done: package-repository-$VERSION.tar.gz"
 fi
 sha512sum package-repository-$VERSION.tar.gz > package-repository-$VERSION.tar.gz.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/package-repository"
-mv package-repository-$VERSION.tar.gz $RELEASE_PATH/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz
-mv package-repository-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz.sha512.txt
-cd ../../..
+
+# Publish to package server
+echo "curl -X POST  --data-binary @package-repository-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/package-repository-$VERSION.tar.gz \n"
+curl -X POST  --data-binary @package-repository-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz
+echo "curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/package-repository/package-repository-$VERSION.tar.gz.sha512.txt \n"
+curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/package-repository/package-repository-$VERSION.tar.gz.sha512.txt
