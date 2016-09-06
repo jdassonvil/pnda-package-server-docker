@@ -12,13 +12,10 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN npm install grunt
 
-COPY build.sh /tmp
-COPY build.d /tmp/build.d
-
 ENV GITHUB_ENDPOINT https://github.com/pndaproject
 ENV BRANCH master
 
 WORKDIR /tmp
 
 # Run Command
-CMD ["/tmp/build.sh"]
+CMD ["/bin/bash"]
