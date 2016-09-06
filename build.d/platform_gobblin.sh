@@ -1,6 +1,8 @@
 #!/bin/sh
 
 PLATFORM_GOBBLIN="$GITHUB_ENDPOINT/gobblin.git" 
+PACKAGE_SERVER="http://192.168.1.205:3535"
+
 echo "Cloning gobblin $PLATFORM_GOBBLIN in $PWD"
 if [ ! -d "$PWD/gobblin" ]; then
 	git clone $PLATFORM_GOBBLIN
