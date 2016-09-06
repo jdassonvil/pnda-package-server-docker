@@ -10,6 +10,8 @@ RUN apt-get update -y && apt-get install -y wget git nodejs npm gradle curl pyth
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
+RUN npm install grunt
+
 COPY build.sh /tmp
 COPY build.d /tmp/build.d
 
