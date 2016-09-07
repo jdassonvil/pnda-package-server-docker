@@ -58,6 +58,8 @@ else
 	echo "	Build done: console-backend-data-manager-$VERSION.tar.gz"
 fi
 
+sha512sum console-backend-data-manager-$VERSION.tar.gz > console-backend-data-manager-$VERSION.tar.gz.sha512.txt
+
 # Publish to package server
 
 echo "curl -X POST --data-binary @console-backend-data-manager-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/console-backend-data-manager-$VERSION.tar.gz"
