@@ -34,7 +34,7 @@ fi
 sha512sum package-repository-$VERSION.tar.gz > package-repository-$VERSION.tar.gz.sha512.txt
 
 # Publish to package server
-echo "curl -X POST  --data-binary @package-repository-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/console/package-repository-$VERSION.tar.gz \n"
+echo "curl -X POST  --data-binary @package-repository-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz \n"
 curl -X POST  --data-binary @package-repository-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz
-echo "curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/package-repository/package-repository-$VERSION.tar.gz.sha512.txt \n"
-curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/package-repository/package-repository-$VERSION.tar.gz.sha512.txt
+echo "curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz.sha512.txt \n"
+curl -X POST --data-binary @package-repository-$VERSION.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/package-repository/package-repository-$VERSION.tar.gz.sha512.txt
