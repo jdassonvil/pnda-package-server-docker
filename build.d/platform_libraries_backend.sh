@@ -47,8 +47,8 @@ sha512sum platformlibs-$VERSION-py2.7.egg > platformlibs-$VERSION-py2.7.egg.sha5
 
 # Publish to package server
 
-echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg"
-curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg
+echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg"
+curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg $PACKAGE_SERVER/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg
 
-echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg.sha512.txt"
-curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-librairies/platformlibs-$VERSION-py2.7.egg.sha512.txt
+echo "curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg.sha512.txt"
+curl -X POST --data-binary @platformlibs-$VERSION-py2.7.egg.sha512.txt $PACKAGE_SERVER/packages/platform/releases/platform-libraries/platformlibs-$VERSION-py2.7.egg.sha512.txt
