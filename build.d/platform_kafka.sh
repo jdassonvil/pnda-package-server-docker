@@ -36,6 +36,6 @@ cd ../../..
 # Publish to package server
 
 echo "curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz"
-curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz
+curl -X POST --data-binary @kafka-manager-${VERSION}.zip $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip
 echo "curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz.sha512.txt"
-curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz.sha512.txt
+curl -X POST --data-binary @kafka-manager-${VERSION}.zip.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip.sha512.txt
