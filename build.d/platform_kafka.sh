@@ -28,14 +28,9 @@ else
 fi
 
 sha512sum kafka-manager-${VERSION}.zip > kafka-manager-${VERSION}.zip.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/kafka-manager"
-mv kafka-manager-${VERSION}.zip $RELEASE_PATH/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip
-mv kafka-manager-${VERSION}.zip.sha512.txt $RELEASE_PATH/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip.sha512.txt
-cd ../../..
 
 # Publish to package server
-
-echo "curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz"
+echo "curl -X POST --data-binary @kafka-manager-${VERSION}.zip $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip"
 curl -X POST --data-binary @kafka-manager-${VERSION}.zip $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip
-echo "curl -X POST --data-binary @kafka-manager-${VERSION}.tar.gz.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.tar.gz.sha512.txt"
+echo "curl -X POST --data-binary @kafka-manager-${VERSION}.zip.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip.sha512.txt"
 curl -X POST --data-binary @kafka-manager-${VERSION}.zip.sha512.txt $PACKAGE_SERVER/packages/platform/releases/kafka-manager/kafka-manager-${VERSION}.zip.sha512.txt
