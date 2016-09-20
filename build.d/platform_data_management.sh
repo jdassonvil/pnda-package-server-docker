@@ -33,10 +33,8 @@ if [ ! -f data-service-$VERSION.tar.gz ]; then
 else
 	echo "	Build done: data-service-$VERSION.tar.gz"
 fi
+
 sha512sum data-service-$VERSION.tar.gz > data-service-$VERSION.tar.gz.sha512.txt
-mkdir -p "$RELEASE_PATH/packages/platform/releases/data-service"
-mv data-service-$VERSION.tar.gz $RELEASE_PATH/packages/platform/releases/data-service/data-service-$VERSION.tar.gz
-mv data-service-$VERSION.tar.gz.sha512.txt $RELEASE_PATH/packages/platform/releases/data-service/data-service-$VERSION.tar.gz.sha512.txt
 
 echo "curl -X POST --data-binary @data-service-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/data-service/data-service-$VERSION.tar.gz"
 curl -X POST --data-binary @data-service-$VERSION.tar.gz $PACKAGE_SERVER/packages/platform/releases/data-service/data-service-$VERSION.tar.gz
