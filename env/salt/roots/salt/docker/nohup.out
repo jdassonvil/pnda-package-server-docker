@@ -1,0 +1,34 @@
+[WARNING ] /usr/lib/python2.7/site-packages/salt/utils/templates.py:73: DeprecationWarning: Starting in 2015.5, cmd.run uses python_shell=False by default, which doesn't support shellisms (pipes, env variables, etc). cmd.run is currently aliased to cmd.shell to prevent breakage. Please switch to cmd.shell or set python_shell=True to avoid breakage in the future, when this aliasing is removed.
+
+local:
+----------
+          ID: docker-image-jenkins
+    Function: cmd.run
+        Name: docker pull pnda-pkgserver:5000/jenkins:2.7.2
+      Result: False
+     Comment: The following requisites were not found:
+                                 require:
+                                     service: docker-service
+     Changes:   
+----------
+          ID: docker-container-startup-config-jenkins
+    Function: file.managed
+        Name: /etc/systemd/system/docker-jenkins.service
+      Result: False
+     Comment: One or more requisite failed: docker.containers.docker-image-jenkins
+     Changes:   
+----------
+          ID: docker-container-service-jenkins
+    Function: service.running
+        Name: docker-jenkins
+      Result: False
+     Comment: One or more requisite failed: docker.containers.docker-container-startup-config-jenkins
+     Changes:   
+
+Summary for local
+------------
+Succeeded: 0
+Failed:    3
+------------
+Total states run:     3
+Total run time:   0.000 ms
