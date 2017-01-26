@@ -1,12 +1,12 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
-RUN apt-get update --fix-missing
-RUN apt-get install -y apt-transport-https
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates
 
-RUN echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 
-RUN apt-get update -y && apt-get install -y wget git nodejs npm gradle curl python-setuptools sbt
+RUN apt-get update -y 
+RUN apt-get install -y wget git nodejs npm gradle curl python-setuptools sbt
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
