@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_TESTING="$GITHUB_ENDPOINT/platform-testing.git"
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Step 1: cloning platform-testing $PLATFORM_TESTING in $PWD"
 

@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_GOBBLIN="$GITHUB_ENDPOINT/gobblin.git" 
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Cloning gobblin $PLATFORM_GOBBLIN in $PWD"
 if [ ! -d "$PWD/gobblin" ]; then

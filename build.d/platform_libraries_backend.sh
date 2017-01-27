@@ -1,17 +1,21 @@
 #!/bin/sh
 
-PLATFORM_LIBRARIES="$GITHUB_ENDPOINT/platform-libraries.git" 
-PACKAGE_SERVER="http://192.168.1.205:3535"
+source "$(dirname "$0")"/common.sh
 
-echo "Cloning platform-libraries $PLATFORM_LIBRARIES in $PWD" >> $LOG_FILE
+init_package_server
+init_github_endpoint
+
+PLATFORM_LIBRARIES="$GITHUB_ENDPOINT/platform-libraries.git" 
+
+echo "Cloning platform-libraries $PLATFORM_LIBRARIES in $PWD"
 if [ ! -d "$PWD/platform-libraries" ]; then
 	git clone $PLATFORM_LIBRARIES
 	if [ ! -d "$PWD/platform-libraries" ]; then
-		echo "Error clonning platform-libraries" >> $LOG_FILE
+		echo "Error clonning platform-libraries"
 		exit 1
 	fi
 else
-	echo "	getting $BRANCH for platform-libraries" >> $LOG_FILE
+	echo "	getting $BRANCH for platform-libraries"
 fi
 cd platform-libraries
 git checkout $BRANCH
@@ -33,15 +37,15 @@ if [ ! -d $SPARK_HOME ]; then
   tar -xvzf spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION.tgz
   cd platform-libraries
 else
-  echo "	SPARK_HOME is already set as $SPARK_HOME" >> $LOG_FILE
+  echo "	SPARK_HOME is already set as $SPARK_HOME"
 fi
 python setup.py bdist_egg
 cd dist
 if [ ! -f platformlibs-$VERSION-py2.7.egg ]; then
-	echo "	Error building platform-libraries" >> $LOG_FILE
+	echo "	Error building platform-libraries"
 	exit 1
 else
-	echo "	Build done: platformlibs-$VERSION-py2.7.egg" >> $LOG_FILE
+	echo "	Build done: platformlibs-$VERSION-py2.7.egg"
 fi
 sha512sum platformlibs-$VERSION-py2.7.egg > platformlibs-$VERSION-py2.7.egg.sha512.txt
 

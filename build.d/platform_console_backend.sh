@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_CONSOLE_BACKEND="$GITHUB_ENDPOINT/platform-console-backend.git" 
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Cloning platform-console-backend $PLATFORM_CONSOLE_BACKEND in $PWD"
 if [ ! -d "$PWD/platform-console-backend" ]; then

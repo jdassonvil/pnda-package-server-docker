@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_PACKAGE_REPOSITORY="$GITHUB_ENDPOINT/platform-package-repository.git"
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Cloning platform-package-repository $PLATFORM_PACKAGE_REPOSITORY in $PWD"
 if [ ! -d "$PWD/platform-package-repository" ]; then

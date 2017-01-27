@@ -12,10 +12,9 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN npm install -g grunt
 
-ENV GITHUB_ENDPOINT https://github.com/pndaproject
 ENV BRANCH master
 
 WORKDIR /tmp
 
 # Run Command
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]

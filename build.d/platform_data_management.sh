@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_DATA_MANAGEMENT="$GITHUB_ENDPOINT/platform-data-mgmnt.git" 
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Cloning platform-data-mgmnt $PLATFORM_DATA_MANAGEMENT in $PWD"
 git clone $PLATFORM_DATA_MANAGEMENT

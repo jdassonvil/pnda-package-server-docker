@@ -1,7 +1,11 @@
 #!/bin/sh
 
+source "$(dirname "$0")"/common.sh
+
+init_package_server
+init_github_endpoint
+
 PLATFORM_DEPLOYMENT_MANAGER="$GITHUB_ENDPOINT/platform-deployment-manager.git"
-PACKAGE_SERVER="http://192.168.1.205:3535"
 
 echo "Cloning platform-deployment-manager $PLATFORM_DEPLOYMENT_MANAGER in $PWD"
 if [ ! -d "$PWD/platform-deployment-manager" ]; then
