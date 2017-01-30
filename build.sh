@@ -4,15 +4,11 @@ package=$1
 repo_url=$2
 
 if [ -z $package ] || [ -z $repo_url ]; then
-  echo "Syntax: build.sh <package name> <package repository url> [env] [github endpoint]"
+  echo "Syntax: build.sh <package name> <package repository url> [github endpoint]"
   exit 1
 fi
 
-if [ -z $3 ]; then
-  env="build"
-else
-  env="build-$3"
-fi
+env="build"
 
 if [ -z $4 ]; then
   github="https://github.com/pndaproject"
@@ -24,7 +20,7 @@ image_name="pnda/$env"
 image=$(docker images --format "table {{.Repository}}:{{.Tag}}" | grep $image_name)
 
 if [ -z "$image" ]; then 
-  echo "Build environment missing"
+  echo "Building docker image for build, this might take a few minutes..."
   build_cmd="docker build -t $image_name -f $env.dockerfile ."
   echo $build_cmd
 
